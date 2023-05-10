@@ -3,7 +3,7 @@ const { AuthenticationError } = require("apollo-server-express");
 
 const resolvers = {
   Query: {
-    getUser: async (_, { userId }, context) => {
+    me: async (_, { userId }, context) => {
       const user = await User.findById(userId).populate("savedBooks");
       if (!user) {
         throw new AuthenticationError("No user found with this id");
@@ -15,7 +15,8 @@ const resolvers = {
   Mutation: {
     addUser: async (_, { user }) => {
       const newUser = await User.create(user);
-      return newUser;
+      const token = signToken(user);
+      return { token, newUser };
     },
 
     loginUser: async (_, { email, password }) => {

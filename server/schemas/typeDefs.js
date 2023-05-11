@@ -32,13 +32,13 @@ const typeDefs = gql`
     addUser($username: String!, $email: String!, $password: String!): Auth
     loginUser($email: String!, $password: String!): Auth
     saveBook(
-      $userId: ID!
-      $authors: [String!]!
-      $description: String!
-      $bookId: String!
-      $image: String
-      $link: String
-      $title: String
+      userId: ID!
+      authors: [String!]!
+      description: String!
+      bookId: String!
+      image: String
+      link: String
+      title: String
     ): User
     removeBook($userId: ID!, $bookId: String!): User
   }

@@ -39,7 +39,7 @@ const resolvers = {
 
     saveBook: async (_, { userId, book }) => {
       const updatedUser = await User.findByIdAndUpdate(
-        userId,
+        { userId },
         { $addToSet: { savedBooks: book } },
         { new: true }
       ).populate("savedBooks");
@@ -53,7 +53,7 @@ const resolvers = {
 
     removeBook: async (_, { userId, bookId }) => {
       const updatedUser = await User.findByIdAndUpdate(
-        userId,
+        { userId },
         { $pull: { savedBooks: { bookId } } },
         { new: true }
       ).populate("savedBooks");
